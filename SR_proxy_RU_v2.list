@@ -1,0 +1,17 @@
+# NAME: Shadowrocket additional proxy list (RU)
+# COMMENT: Supplemental list to Antifilter.download
+# AUTHOR: Gevoraway
+# REPO: https://github.com/Gevoraway/Shadowrocket
+# UPDATED: 13 August 2024 at 16:06:29 GMT+3
+DOMAIN-SUFFIX,habr.com
+DOMAIN-SUFFIX,ifconfig.me
+DOMAIN-SUFFIX,ipinfo.io
+DOMAIN-SUFFIX,aol.com
+DOMAIN-SUFFIX,browserleaks.com
+DOMAIN-SUFFIX,dyson.com
+DOMAIN-KEYWORD,anzu-us
+DOMAIN-KEYWORD,gameloft
+DOMAIN-KEYWORD,kahoot
+DOMAIN-KEYWORD,instagram
+DOMAIN-KEYWORD,spotify
+DOMAIN-KEYWORD,deezer
