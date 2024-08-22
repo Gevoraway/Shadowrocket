@@ -1,7 +1,7 @@
 # NAME: Shadowrocket youtube proxy list (RU)
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 21 August 2024 at 15:15:00 GMT+3
+# UPDATED: 22 August 2024 at 15:16:00 GMT+3
 DOMAIN-SUFFIX,googlevideo.com
 DOMAIN-SUFFIX,youtu.be
 DOMAIN-SUFFIX,yt.be
