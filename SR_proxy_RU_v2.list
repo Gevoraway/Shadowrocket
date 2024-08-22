@@ -9,7 +9,7 @@ DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,aol.com
 DOMAIN-SUFFIX,browserleaks.com
 DOMAIN-SUFFIX,dyson.com
-DOMAIN-SUFFIX, stun.l.google.com, reject-drop
+DOMAIN-SUFFIX,stun.l.google.com, reject-drop
 DOMAIN-KEYWORD,anzu-us
 DOMAIN-KEYWORD,gameloft
 DOMAIN-KEYWORD,kahoot
