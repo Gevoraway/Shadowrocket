@@ -11,6 +11,7 @@ DOMAIN-SUFFIX,aol.com
 DOMAIN-SUFFIX,browserleaks.com
 DOMAIN-SUFFIX,dyson.com
 DOMAIN-SUFFIX,stun.l.google.com, reject-drop
+DOMAIN-SUFFIX,video-cf.twimg.com
 DOMAIN-KEYWORD,anzu-us
 DOMAIN-KEYWORD,gameloft
 DOMAIN-KEYWORD,kahoot
