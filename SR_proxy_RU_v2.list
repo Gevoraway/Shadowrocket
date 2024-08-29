@@ -2,9 +2,13 @@
 # COMMENT: Supplemental list to Antifilter.download
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 25 August 2024 at 11:23:00 GMT+3
+# UPDATED: 29 August 2024 at 15:47:00 GMT+3
 DOMAIN-SUFFIX,godaddy.com
 DOMAIN-SUFFIX,habr.com
+DOMAIN-SUFFIX,notion.so
+DOMAIN-SUFFIX,notion-static.com
+DOMAIN-SUFFIX,signal.org
+DOMAIN-SUFFIX,wix.com
 DOMAIN-SUFFIX,ifconfig.me
 DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,aol.com
