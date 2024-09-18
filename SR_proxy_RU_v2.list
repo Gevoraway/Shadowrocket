@@ -16,6 +16,7 @@ DOMAIN-SUFFIX,aol.com
 DOMAIN-SUFFIX,browserleaks.com
 DOMAIN-SUFFIX,dyson.com
 DOMAIN-SUFFIX,proton.me
+DOMAIN-SUFFIX,mail-api.proton.me
 DOMAIN-SUFFIX,pornhub.com
 DOMAIN-SUFFIX,phncdn.com
 DOMAIN-SUFFIX,stun.l.google.com, reject-drop
