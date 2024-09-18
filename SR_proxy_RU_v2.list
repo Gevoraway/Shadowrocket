@@ -2,7 +2,7 @@
 # COMMENT: Supplemental list to Antifilter.download
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 06 September 2024
+# UPDATED: 18 September 2024
 DOMAIN-SUFFIX,contabo.com
 DOMAIN-SUFFIX,godaddy.com
 DOMAIN-SUFFIX,habr.com
@@ -15,6 +15,8 @@ DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,aol.com
 DOMAIN-SUFFIX,browserleaks.com
 DOMAIN-SUFFIX,dyson.com
+DOMAIN-SUFFIX,proton.me
+DOMAIN-SUFFIX,pornhub.com
 DOMAIN-SUFFIX,stun.l.google.com, reject-drop
 DOMAIN-SUFFIX,video-cf.twimg.com
 DOMAIN-KEYWORD,anzu-us
