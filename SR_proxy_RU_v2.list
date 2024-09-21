@@ -3,6 +3,8 @@
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
 # UPDATED: 19 September 2024
+DOMAIN-SUFFIX,threema.ch
+DOMAIN-SUFFIX,three.ma
 DOMAIN-SUFFIX,contabo.com
 DOMAIN-SUFFIX,godaddy.com
 DOMAIN-SUFFIX,habr.com
