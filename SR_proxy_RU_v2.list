@@ -2,7 +2,7 @@
 # COMMENT: Supplemental list to Antifilter.download
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 27 October 2024
+# UPDATED: 16 November 2024
 DOMAIN-SUFFIX,threema.ch
 DOMAIN-SUFFIX,three.ma
 DOMAIN-SUFFIX,contabo.com
@@ -54,6 +54,9 @@ DOMAIN-SUFFIX,proton.me
 DOMAIN-SUFFIX,mail-api.proton.me
 DOMAIN-SUFFIX,protonvpn.com
 DOMAIN-SUFFIX,pornhub.com
+DOMAIN-SUFFIX,spankbang.com
+DOMAIN-SUFFIX,txxxporn.tube
+DOMAIN-SUFFIX,pornzog.com
 DOMAIN-SUFFIX,phncdn.com
 DOMAIN-SUFFIX,stun.l.google.com,reject-drop
 DOMAIN-SUFFIX,video-cf.twimg.com
