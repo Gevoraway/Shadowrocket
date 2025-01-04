@@ -1,0 +1,7 @@
+# NAME: Shadowrocket chatgpt proxy list (RU)
+# AUTHOR: Gevoraway
+# REPO: https://github.com/Gevoraway/Shadowrocket
+# UPDATED: 04 January 2025
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,stripe.com
