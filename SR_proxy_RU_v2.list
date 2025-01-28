@@ -2,7 +2,7 @@
 # COMMENT: Supplemental list to Antifilter.download
 # AUTHOR: Gevoraway
 # REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 27 January 2025
+# UPDATED: 28 January 2025
 DOMAIN-SUFFIX,threema.ch
 DOMAIN-SUFFIX,three.ma
 DOMAIN-SUFFIX,contabo.com
@@ -81,6 +81,8 @@ DOMAIN-SUFFIX,readdle.com
 DOMAIN-SUFFIX,pdfexpert.com
 DOMAIN-SUFFIX,loseit.com
 DOMAIN-SUFFIX,fitnowinc.com
+DOMAIN-SUFFIX,fengkongcloud.com
+DOMAIN-SUFFIX,food-search.prod.fitnowinc.com
 DOMAIN-KEYWORD,anzu-us
 DOMAIN-KEYWORD,gameloft
 DOMAIN-KEYWORD,kahoot
