@@ -8,20 +8,19 @@ source_url = "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/main/
 with open("domains.txt", "r", encoding="utf-8") as f:
     domains = f.readlines()
 
-# Обрабатываем: убираем дубликаты, оставляем только домены второго уровня
+# Обрабатываем: убираем дубликаты, удаляем "www" и "wwww", оставляем только домены второго уровня
 cleaned_domains = set()
 for domain in domains:
     domain = domain.strip().lower()
-
-    # Удаляем "www." и "wwww." в начале домена
-    domain = re.sub(r"^w{3,4}\.", "", domain)
 
     # Преобразуем в домен второго уровня
     parts = domain.split(".")
     if len(parts) > 2:
         domain = ".".join(parts[-2:])
 
-    cleaned_domains.add(domain)
+    # Удаляем домены, начинающиеся на "www" или "wwww"
+    if not domain.startswith(("www", "wwww")):
+        cleaned_domains.add(domain)
 
 # Формируем список с префиксом в верхнем регистре
 processed_domains = sorted(f"DOMAIN-SUFFIX,{domain}" for domain in cleaned_domains)
