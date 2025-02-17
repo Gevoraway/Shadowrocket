@@ -28,9 +28,11 @@ jobs:
           python process_domains.py
           
       - name: Коммит изменений (если есть)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add processed_domains.txt || echo "Файл не найден!"
+          git add domains_refilter.list || echo "Файл не найден!"
           git commit -m "Обновлен список доменов" || echo "Нет изменений, коммит не требуется"
           git push || echo "Нет изменений, пуш не требуется"
