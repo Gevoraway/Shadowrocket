@@ -19,7 +19,7 @@ jobs:
 
       - name: Скачивание и обработка списка
         run: |
-          curl -o domains.txt "https://raw.githubusercontent.com/ВАШ_РЕПО/ВАШ_ФАЙЛ.txt"
+          curl -o domains.txt "https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/domains_all.lst"
 
           # Запуск Python-скрипта для обработки файла
           python process_domains.py
