@@ -26,9 +26,11 @@ jobs:
 
           # Запуск Python-скрипта для обработки файла
           python process_domains.py
-
+          
       - name: Коммит изменений (если есть)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git diff --quiet || (git add processed_domains.txt && git commit -m "Обновлен список доменов" && git push)
+          git add processed_domains.txt || echo "Файл не найден!"
+          git commit -m "Обновлен список доменов" || echo "Нет изменений, коммит не требуется"
+          git push || echo "Нет изменений, пуш не требуется"
