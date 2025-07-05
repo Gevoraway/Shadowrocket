@@ -86,6 +86,8 @@ DOMAIN-SUFFIX,food-search.prod.fitnowinc.com
 DOMAIN-SUFFIX,tvrain.tv
 DOMAIN-SUFFIX,linktr.ee
 DOMAIN-SUFFIX,play.google.com
+DOMAIN-SUFFIX,irobot.com
+DOMAIN-SUFFIX,irobotapi.com
 DOMAIN-KEYWORD,anzu-us
 DOMAIN-KEYWORD,gameloft
 DOMAIN-KEYWORD,kahoot
@@ -95,4 +97,3 @@ DOMAIN-KEYWORD,deezer
 DOMAIN-KEYWORD,intimcity
 DOMAIN-KEYWORD,youtube
 DOMAIN-KEYWORD,sephora
-DOMAIN-KEYWORD,irobot
