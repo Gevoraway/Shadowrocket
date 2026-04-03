@@ -1,8 +1,4 @@
-# NAME: Shadowrocket additional proxy list (RU)
-# COMMENT: Supplemental list to Antifilter.download
-# AUTHOR: Gevoraway
-# REPO: https://github.com/Gevoraway/Shadowrocket
-# UPDATED: 16 August 2025
+# NAME: Shadowrocket additional proxy list
 DOMAIN-SUFFIX,threema.ch
 DOMAIN-SUFFIX,three.ma
 DOMAIN-SUFFIX,contabo.com
@@ -128,12 +124,13 @@ DOMAIN-SUFFIX,moltbook.com
 DOMAIN-SUFFIX,justice.gov
 DOMAIN-SUFFIX,thetimes.com
 DOMAIN-SUFFIX,tatler.com
-DOMAIN_SUFFIX,runna.com
+DOMAIN-SUFFIX,runna.com
 DOMAIN-SUFFIX,mmcdn.com
 DOMAIN-SUFFIX,xhcdn.com
 DOMAIN-SUFFIX,xvideos-cdn.com
 DOMAIN-SUFFIX,macbb.org
 DOMAIN-SUFFIX,soundlcloud.com
+DOMAIN-SUFFIX,vogue.com
 DOMAIN-KEYWORD,anzu-us
 DOMAIN-KEYWORD,gameloft
 DOMAIN-KEYWORD,kahoot
