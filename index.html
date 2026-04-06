@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SR Proxy List</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #e8ff47;
+    --accent2: #47c8ff;
+    --text: #e8e8f0;
+    --muted: #5a5a7a;
+    --success: #47ffb0;
+    --error: #ff4772;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 16px;
+  }
+
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* INPUT */
+  .input-group {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="text"]::placeholder { color: var(--muted); }
+
+  input[type="text"]:focus {
+    border-color: var(--accent);
+  }
+
+  input[type="text"].error-input {
+    border-color: var(--error);
+  }
+
+  button.add-btn {
+    background: var(--accent);
+    color: #0a0a0f;
+    border: none;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 14px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+
+  button.add-btn:hover { opacity: 0.88; }
+  button.add-btn:active { transform: scale(0.97); }
+  button.add-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* STATUS */
+  .status-box {
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  .status-box.show { display: flex; }
+
+  .status-box.success {
+    background: rgba(71, 255, 176, 0.08);
+    border: 1px solid rgba(71, 255, 176, 0.2);
+    color: var(--success);
+  }
+
+  .status-box.error {
+    background: rgba(255, 71, 114, 0.08);
+    border: 1px solid rgba(255, 71, 114, 0.2);
+    color: var(--error);
+  }
+
+  .status-box.loading {
+    background: rgba(71, 200, 255, 0.08);
+    border: 1px solid rgba(71, 200, 255, 0.2);
+    color: var(--accent2);
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(71,200,255,0.3);
+    border-top-color: var(--accent2);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer a {
+    color: var(--accent2);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🚀</div>
+      <h1>SR Proxy List</h1>
+    </div>
+    <div class="subtitle">Добавляй сайты, которые нужно открывать через прокси</div>
+  </header>
+
+  <!-- ADD DOMAIN -->
+  <div class="card">
+    <div class="card-label">Добавить домен или IP</div>
+    <div class="input-group">
+      <input type="text" id="domainInput" placeholder="example.com или 192.168.1.1" autocomplete="off" autocapitalize="off" spellcheck="false" />
+      <button class="add-btn" id="addBtn" onclick="addDomain()">Добавить</button>
+    </div>
+    <div class="hint">Вставляй адрес сайта в любом формате — система сама определит домен.<br>Российские домены (.ru, .рф и др.) не добавляются.</div>
+    <div class="status-box" id="statusBox">
+      <div class="spinner" id="spinner" style="display:none"></div>
+      <span id="statusText"></span>
+    </div>
+  </div>
+
+  <footer>
+    Домен попадёт в список в течение нескольких секунд
+  </footer>
+</div>
+
+<script>
+  const GITHUB_TOKEN = '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';
+  const REPO_OWNER = 'Gevoraway';
+  const REPO_NAME = 'Shadowrocket';
+  const FILE_PATH = 'SR_proxy_RU_v2.list';
+  const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+  const RAW_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${FILE_PATH}`;
+
+  let currentSha = null;
+  let currentContent = '';
+
+  function setStatus(type, text) {
+    const box = document.getElementById('statusBox');
+    const txt = document.getElementById('statusText');
+    const spinner = document.getElementById('spinner');
+    box.className = 'status-box show ' + type;
+    txt.textContent = text;
+    spinner.style.display = type === 'loading' ? 'block' : 'none';
+  }
+
+  function hideStatus() {
+    document.getElementById('statusBox').className = 'status-box';
+  }
+
+  // Russian TLDs to block
+  const RU_TLDS = new Set([
+    'ru','рф','su','moscow','москва','tatar'
+  ]);
+
+  // Multi-level TLDs that should be kept as-is (e.g. co.uk, com.au)
+  const MULTI_TLDS = new Set([
+    'co.uk','co.jp','co.kr','co.nz','co.za','co.in','co.il','co.id',
+    'com.au','com.br','com.cn','com.ar','com.mx','com.tr','com.sg',
+    'com.hk','com.ua','com.vn','com.pe','com.co','com.ph',
+    'org.uk','net.au','gov.uk','ac.uk','me.uk'
+  ]);
+
+  function extractRootDomain(input) {
+    // Strip protocol, path, port, query
+    let d = input.trim()
+      .replace(/^https?:\/\//i, '')
+      .replace(/^ftp:\/\//i, '')
+      .toLowerCase()
+      .split('/')[0]
+      .split('?')[0]
+      .split('#')[0]
+      .split(':')[0];
+
+    // Strip www. or any subdomain chains
+    // First check for multi-level TLD
+    const parts = d.split('.');
+    if (parts.length < 2) return null;
+
+    // Check if last two parts form a known multi-level TLD
+    const lastTwo = parts.slice(-2).join('.');
+    if (MULTI_TLDS.has(lastTwo) && parts.length >= 3) {
+      // root = parts[-3] + lastTwo
+      return parts.slice(-3).join('.');
+    }
+
+    // Otherwise root = last two parts
+    return parts.slice(-2).join('.');
+  }
+
+  function isRussianDomain(domain) {
+    const parts = domain.split('.');
+    const tld = parts[parts.length - 1];
+    return RU_TLDS.has(tld);
+  }
+
+  function isValidDomain(d) {
+    if (!d) return false;
+    // Must have at least one dot and valid characters
+    return /^[a-z0-9]([a-z0-9\-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9\-]*[a-z0-9])?)+$/.test(d);
+  }
+
+  async function addDomain() {
+    const input = document.getElementById('domainInput');
+    const btn = document.getElementById('addBtn');
+    const raw = input.value.trim();
+
+    if (!raw) return;
+
+    const domain = extractRootDomain(raw);
+
+    if (!domain || !isValidDomain(domain)) {
+      input.classList.add('error-input');
+      setStatus('error', `Не удалось распознать домен. Пример: instagram.com`);
+      setTimeout(() => { input.classList.remove('error-input'); hideStatus(); }, 3500);
+      return;
+    }
+
+    if (isRussianDomain(domain)) {
+      input.classList.add('error-input');
+      setStatus('error', `Российские домены (.ru, .рф и др.) не добавляются`);
+      setTimeout(() => { input.classList.remove('error-input'); hideStatus(); }, 3500);
+      return;
+    }
+
+    // Check duplicate
+    if (currentContent && currentContent.includes(domain)) {
+      setStatus('error', `${domain} уже есть в списке`);
+      setTimeout(hideStatus, 3000);
+      return;
+    }
+
+    btn.disabled = true;
+    setStatus('loading', `Добавляю ${domain}...`);
+
+    try {
+      // Reload to get fresh SHA
+      const getRes = await fetch(API_BASE, {
+        headers: { Authorization: `token ${GITHUB_TOKEN}` }
+      });
+      if (!getRes.ok) throw new Error('Ошибка чтения файла');
+      const getData = await getRes.json();
+      currentSha = getData.sha;
+      currentContent = atob(getData.content.replace(/\n/g, ''));
+
+      if (currentContent && currentContent.includes(domain)) {
+        setStatus('error', `${domain} уже есть в списке`);
+        btn.disabled = false;
+        setTimeout(hideStatus, 3000);
+        return;
+      }
+
+      const newLine = `DOMAIN-SUFFIX,${domain}`;
+      const newContent = currentContent.trimEnd() + '\n' + newLine + '\n';
+      const encoded = btoa(unescape(encodeURIComponent(newContent)));
+
+      const putRes = await fetch(API_BASE, {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Add ${domain}`,
+          content: encoded,
+          sha: currentSha
+        })
+      });
+
+      if (!putRes.ok) {
+        const err = await putRes.json();
+        throw new Error(err.message || 'Ошибка записи');
+      }
+
+      const putData = await putRes.json();
+      currentSha = putData.content.sha;
+      currentContent = newContent;
+
+      setStatus('success', `✓ ${domain} добавлен в список`);
+      input.value = '';
+      setTimeout(hideStatus, 4000);
+
+    } catch(e) {
+      setStatus('error', `Ошибка: ${e.message}`);
+      setTimeout(hideStatus, 5000);
+    }
+
+    btn.disabled = false;
+  }
+
+  // Enter key
+  document.getElementById('domainInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addDomain();
+  });
+
+</script>
+</body>
+</html>
