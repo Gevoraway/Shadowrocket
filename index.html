@@ -370,16 +370,23 @@
     setStatus('loading', `Добавляю ${domain}...`);
 
     try {
-      // Reload to get fresh SHA
-      const getRes = await fetch(API_BASE, {
-        headers: { Authorization: `token ${GITHUB_TOKEN}` }
-      });
-      if (!getRes.ok) throw new Error('Ошибка чтения файла');
+      const headers = {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      };
+
+      const getRes = await fetch(API_BASE, { headers });
+      if (!getRes.ok) {
+        const e = await getRes.json().catch(() => ({}));
+        throw new Error(e.message || `HTTP ${getRes.status}`);
+      }
       const getData = await getRes.json();
       currentSha = getData.sha;
       currentContent = atob(getData.content.replace(/\n/g, ''));
 
-      if (currentContent && currentContent.includes(domain)) {
+      if (currentContent.includes(domain)) {
         setStatus('error', `${domain} уже есть в списке`);
         btn.disabled = false;
         setTimeout(hideStatus, 3000);
@@ -392,20 +399,13 @@
 
       const putRes = await fetch(API_BASE, {
         method: 'PUT',
-        headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: `Add ${domain}`,
-          content: encoded,
-          sha: currentSha
-        })
+        headers,
+        body: JSON.stringify({ message: `Add ${domain}`, content: encoded, sha: currentSha })
       });
 
       if (!putRes.ok) {
-        const err = await putRes.json();
-        throw new Error(err.message || 'Ошибка записи');
+        const e = await putRes.json().catch(() => ({}));
+        throw new Error(e.message || `HTTP ${putRes.status}`);
       }
 
       const putData = await putRes.json();
